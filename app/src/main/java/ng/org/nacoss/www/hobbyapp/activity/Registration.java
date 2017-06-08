@@ -180,7 +180,7 @@ public class Registration extends AppCompatActivity {
                     String status = response.body().getStatus();
                     String message = response.body().getMessage();
 
-                    if (status == SUCCESS_STATUS) {
+                    if (status.equals(Utility.SUCCESS_STATUS)) {
                         Toast toast = Toast.makeText(getApplicationContext(),message , Toast.LENGTH_LONG);
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
