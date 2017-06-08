@@ -1,6 +1,7 @@
 
 package ng.org.nacoss.www.hobbyapp.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -25,7 +26,7 @@ public class Data implements Parcelable
     private String email;
     @SerializedName("hobbies")
     @Expose
-    private List<Hobby> hobbies = null;
+    private ArrayList<Hobby> hobbies;
     public final static Creator<Data> CREATOR = new Creator<Data>() {
 
 
@@ -38,7 +39,9 @@ public class Data implements Parcelable
             instance.dateCreated = ((String) in.readValue((String.class.getClassLoader())));
             instance.username = ((String) in.readValue((String.class.getClassLoader())));
             instance.email = ((String) in.readValue((String.class.getClassLoader())));
-            in.readList(instance.hobbies, (Hobby.class.getClassLoader()));
+            instance.hobbies= in.readArrayList((Hobby.class.getClassLoader()));
+//            if(instance.hobbies !=null)
+//            in.readList(instance.hobbies, (Hobby.class.getClassLoader()));
             return instance;
         }
 
@@ -81,11 +84,11 @@ public class Data implements Parcelable
         this.email = email;
     }
 
-    public List<Hobby> getHobbies() {
+    public ArrayList<Hobby> getHobbies() {
         return hobbies;
     }
 
-    public void setHobbies(List<Hobby> hobbies) {
+    public void setHobbies(ArrayList<Hobby> hobbies) {
         this.hobbies = hobbies;
     }
 

@@ -29,10 +29,9 @@ public class Hobby implements Parcelable
             Hobby instance = new Hobby();
             instance.id = ((String) in.readValue((String.class.getClassLoader())));
             instance.hobby = ((String) in.readValue((String.class.getClassLoader())));
-            instance.dateCreated = ((String) in.readValue((String.class.getClassLoader())));
+            instance.dateCreated = (String) in.readValue((String.class.getClassLoader()));
             return instance;
         }
-
         public Hobby[] newArray(int size) {
             return (new Hobby[size]);
         }

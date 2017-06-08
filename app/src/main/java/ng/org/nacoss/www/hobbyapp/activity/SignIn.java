@@ -1,5 +1,6 @@
 package ng.org.nacoss.www.hobbyapp.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -34,6 +35,8 @@ public class SignIn extends AppCompatActivity {
     TextView password;
     @InjectView(R.id.sign_in_button)
     Button signIn;
+    @InjectView(R.id.register_on_sign_in)
+    Button register;
     @InjectView(R.id.sign_in_progress_bar)
     ProgressBar progressBar;
 
@@ -51,6 +54,12 @@ public class SignIn extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 attemptLogin();
+            }
+        });
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startRegistrationActivity();
             }
         });
     }
@@ -132,17 +141,16 @@ public class SignIn extends AppCompatActivity {
                     String status = response.body().getStatus();
                     String message = response.body().getMessage();
 
-                    if (status == SUCCESS_STATUS) {
+                    if (status.equals(Utility.SUCCESS_STATUS)) {
                         Data data = response.body().getData();
-                        Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG);
+                        Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
-                        finish();
                         startDashboardActivity(data);
+                        SignIn.this.finish();
+
                     } else {
-                        Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG);
-                        toast.setGravity(Gravity.CENTER, 0, 0);
-                        toast.show();
+                        Utility.displayMessage(SignIn.this,status,message);
                     }
                 }
             }
@@ -157,7 +165,14 @@ public class SignIn extends AppCompatActivity {
     }
     private void startDashboardActivity(Data data) {
 
+        Intent intent = new Intent(SignIn.this,Dashboard.class);
+        intent.putExtra(Intent.EXTRA_TEXT,data);
+        startActivity(intent);
 
+
+    }
+    private void startRegistrationActivity(){
+        startActivity(new Intent(SignIn.this,Registration.class));
 
 
     }

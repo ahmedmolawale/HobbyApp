@@ -19,9 +19,9 @@ import ng.org.nacoss.www.hobbyapp.model.Hobby;
 
 public class HobbiesAdapter extends RecyclerView.Adapter<HobbiesAdapter.CustomViewHolder> {
 
-    List<Hobby> hobbies;
+    ArrayList<Hobby> hobbies;
 
-    public HobbiesAdapter(List<Hobby> hobbies){
+    public HobbiesAdapter(ArrayList<Hobby> hobbies){
 
         this.hobbies  = hobbies;
     }
@@ -42,6 +42,8 @@ public class HobbiesAdapter extends RecyclerView.Adapter<HobbiesAdapter.CustomVi
     @Override
     public void onBindViewHolder(HobbiesAdapter.CustomViewHolder holder, int position) {
                 holder.bind(position);
+                //bind the id of the hobby to the view for easy deletion
+                holder.itemView.setTag(this.hobbies.get(position).getId());
     }
 
     @Override

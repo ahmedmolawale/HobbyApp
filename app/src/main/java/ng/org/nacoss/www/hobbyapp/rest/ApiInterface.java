@@ -2,6 +2,7 @@ package ng.org.nacoss.www.hobbyapp.rest;
 
 import ng.org.nacoss.www.hobbyapp.model.User;
 import retrofit2.Call;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -57,4 +58,7 @@ public interface ApiInterface {
 
     @GET("/api/hobby/{username}")
     Call<User> getHobbies(@Path("username") String username);
+
+    @DELETE("/api/hobby/{username}/{id}")
+    Call<User> deleteHobby(@Path("username") String username,@Path("id") String id);
 }

@@ -23,6 +23,7 @@ import ng.org.nacoss.www.hobbyapp.model.User;
 import ng.org.nacoss.www.hobbyapp.rest.ApiClient;
 import ng.org.nacoss.www.hobbyapp.rest.ApiInterface;
 import okhttp3.ResponseBody;
+import okhttp3.internal.Util;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -183,12 +184,13 @@ public class Registration extends AppCompatActivity {
                         Toast toast = Toast.makeText(getApplicationContext(),message , Toast.LENGTH_LONG);
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
-                        finish();
+                        Registration.this.finish();
                         startLoginActivity();
                     } else {
-                        Toast toast = Toast.makeText(getApplicationContext(),message , Toast.LENGTH_LONG);
-                        toast.setGravity(Gravity.CENTER, 0, 0);
-                        toast.show();
+                        Utility.displayMessage(Registration.this,status,message);
+//                        Toast toast = Toast.makeText(getApplicationContext(),message , Toast.LENGTH_LONG);
+//                        toast.setGravity(Gravity.CENTER, 0, 0);
+//                        toast.show();
                     }
                 }
             }
@@ -207,6 +209,5 @@ public class Registration extends AppCompatActivity {
         Intent intent = new Intent(Registration.this,SignIn.class);
         startActivity(intent);
     }
-
 
 }
